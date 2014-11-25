@@ -80,7 +80,9 @@ public class AddReplyTest {
 			addReply=new AddReply(weiba_id, post_id, post_uid, content);
 			String result=networkService.sendPost(url, addReply.getAddReply());
 			System.out.print(result);
-			boolean value=result.contains("\\u8bc4\\u8bba\\u6210\\u529f");
+			boolean value1=result.contains("\\u8bc4\\u8bba\\u6210\\u529f");
+			boolean value2=result.contains("too frequent");
+			boolean value=value1 || value2;
 			assertTrue(value);
 			
 			
