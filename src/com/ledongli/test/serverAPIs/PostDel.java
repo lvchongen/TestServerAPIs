@@ -14,7 +14,7 @@ public class PostDel {
 		return postDel;
 	}
 	
-	public PostDel() {
+	public PostDel(String post_id) {
 		
 		postDel=new ArrayList<NameValuePair>();
 		
@@ -22,9 +22,9 @@ public class PostDel {
 		postDel.add(new BasicNameValuePair("app","api"));
 		postDel.add(new BasicNameValuePair("mod","group"));
 		postDel.add(new BasicNameValuePair("act","postDel"));
-		postDel.add(new BasicNameValuePair("uid","1"));
-		postDel.add(new BasicNameValuePair("password","111"));
-		postDel.add(new BasicNameValuePair("post_id",""));
+		postDel.add(new BasicNameValuePair("uid","2949163"));
+		postDel.add(new BasicNameValuePair("password","123456"));
+		postDel.add(new BasicNameValuePair("post_id",post_id));
 	}
 	
 	public String getExpectedResult() {

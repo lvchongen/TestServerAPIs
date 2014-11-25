@@ -13,19 +13,20 @@ import org.junit.Test;
 
 import com.ledongli.test.common.AnalyzeResult;
 import com.ledongli.test.common.NetworkService;
-import com.ledongli.test.serverAPIs.AddReply;
 import com.ledongli.test.serverAPIs.DoPostGroup;
+import com.ledongli.test.serverAPIs.GetReplyList;
+import com.ledongli.test.serverAPIs.PostDel;
 import com.ledongli.test.serverAPIs.PostList;
 
-public class AddReplyTest {
+public class PostDelTest {
 
+	private PostDel postDel;
 	private NetworkService networkService;
 	private String url;
 	private DoPostGroup doPostGroup;
-	private AddReply addReply;
 	private AnalyzeResult analyzeResult;
 	private PostList postList;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		networkService=new NetworkService();
@@ -36,17 +37,17 @@ public class AddReplyTest {
 	public void tearDown() throws Exception {
 		networkService=null;
 		doPostGroup=null;
-		addReply=null;
+		postDel=null;
 		analyzeResult=null;
 		postList=null;
 	}
+
 	
-	//验证发帖后， 回复楼主
+	//发帖，删帖， 验证删帖成功
 	@Test
-	public void testReplyOwner() {
+	public void test() {
 		
 		try{
-			
 			//发帖
 			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 			doPostGroup=new DoPostGroup("1000075",timeStamp);
@@ -56,6 +57,7 @@ public class AddReplyTest {
 			postList=new PostList("1000075");
 			String postListResult=networkService.sendPost(url, postList.getPostList());
 			
+			//解析Post_id
 			analyzeResult=new AnalyzeResult(postListResult);
 			JSONObject firstLevel=analyzeResult.getJSON("data");
 			JSONArray secondLevel=firstLevel.getJSONArray("data");
@@ -73,21 +75,39 @@ public class AddReplyTest {
 				
 			}
 			
-			String weiba_id="1000075";
-			String content="This is testing for replying"+timeStamp;
-			String post_uid="2949163";
+			//删帖, 验证条件1， json结构返回success：1 
+			postDel=new PostDel(post_id);
+			String result=networkService.sendPost(url, postDel.getPostDel());
+			boolean value1=result.contains("\"status\":1");
 			
-			addReply=new AddReply(weiba_id, post_id, post_uid, content);
-			String result=networkService.sendPost(url, addReply.getAddReply());
-			System.out.print(result);
-			boolean value1=result.contains("\\u8bc4\\u8bba\\u6210\\u529f");
-			boolean value2=result.contains("too frequent");
-			boolean value=value1 || value2;
+			//验证条件二， 返回postList 中不存在对应post_id
+			//获取回复列表
+			postList=new PostList("1000075");
+			postListResult=networkService.sendPost(url, postList.getPostList());
+			
+			//验证post_id 不存在
+			//解析Post_id
+			analyzeResult=new AnalyzeResult(postListResult);
+			firstLevel=analyzeResult.getJSON("data");
+			secondLevel=firstLevel.getJSONArray("data");
+			length=secondLevel.length();
+			boolean value2=true;
+			
+			for(int i=0;i<length;i++) {
+				JSONObject obj=secondLevel.getJSONObject(i);
+				String post_id_temp=obj.getString("post_id");
+				if(post_id_temp.equals(post_id)) {
+					value2=false;
+					break;
+				}
+				
+			}
+			
+			boolean value=value1 && value2 ;
 			assertTrue(value);
 			
-			
 		}
-		catch(Exception e){
+		catch(Exception e) {
 			fail(e.getMessage());
 		}
 	}

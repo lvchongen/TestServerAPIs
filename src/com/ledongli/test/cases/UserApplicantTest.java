@@ -34,6 +34,7 @@ public class UserApplicantTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, user_applicant.getUser_application());
+			System.out.print(result);
 			boolean value=result.contains("\"status\":1");
 			assertTrue(value);
 		} catch (Exception e) {

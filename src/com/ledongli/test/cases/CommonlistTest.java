@@ -34,7 +34,7 @@ public class CommonlistTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, commentlist.getCommentList());
-			boolean value=result.contains("\"status\":");
+			boolean value=result.contains("\"status\":1");
 			assertTrue(value);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

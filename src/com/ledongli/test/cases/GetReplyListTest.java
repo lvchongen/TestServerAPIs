@@ -15,14 +15,15 @@ import com.ledongli.test.common.AnalyzeResult;
 import com.ledongli.test.common.NetworkService;
 import com.ledongli.test.serverAPIs.AddReply;
 import com.ledongli.test.serverAPIs.DoPostGroup;
+import com.ledongli.test.serverAPIs.GetReplyList;
 import com.ledongli.test.serverAPIs.PostList;
 
-public class AddReplyTest {
+public class GetReplyListTest {
 
 	private NetworkService networkService;
 	private String url;
 	private DoPostGroup doPostGroup;
-	private AddReply addReply;
+	private GetReplyList replyList;
 	private AnalyzeResult analyzeResult;
 	private PostList postList;
 	
@@ -36,17 +37,16 @@ public class AddReplyTest {
 	public void tearDown() throws Exception {
 		networkService=null;
 		doPostGroup=null;
-		addReply=null;
+		replyList=null;
 		analyzeResult=null;
 		postList=null;
 	}
 	
-	//验证发帖后， 回复楼主
+	
+	//发帖，获取回复， 验证回复数字为0
 	@Test
-	public void testReplyOwner() {
-		
-		try{
-			
+	public void testReplyNull() {
+		try {
 			//发帖
 			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 			doPostGroup=new DoPostGroup("1000075",timeStamp);
@@ -56,6 +56,7 @@ public class AddReplyTest {
 			postList=new PostList("1000075");
 			String postListResult=networkService.sendPost(url, postList.getPostList());
 			
+			//解析Post_id
 			analyzeResult=new AnalyzeResult(postListResult);
 			JSONObject firstLevel=analyzeResult.getJSON("data");
 			JSONArray secondLevel=firstLevel.getJSONArray("data");
@@ -73,23 +74,21 @@ public class AddReplyTest {
 				
 			}
 			
-			String weiba_id="1000075";
-			String content="This is testing for replying"+timeStamp;
-			String post_uid="2949163";
-			
-			addReply=new AddReply(weiba_id, post_id, post_uid, content);
-			String result=networkService.sendPost(url, addReply.getAddReply());
+			//获取回复列表
+			replyList=new GetReplyList(post_id, "1000075");
+			String result=networkService.sendPost(url, replyList.getReplyList());
 			System.out.print(result);
-			boolean value1=result.contains("\\u8bc4\\u8bba\\u6210\\u529f");
-			boolean value2=result.contains("too frequent");
-			boolean value=value1 || value2;
+			boolean value=result.contains("\"status\":1") && result.contains("\"reply_count\":\"0\"");
 			assertTrue(value);
-			
-			
 		}
-		catch(Exception e){
+		catch(Exception e) {
 			fail(e.getMessage());
 		}
+	}
+	
+	//发帖， 回复， 获取回复数字为1， 因回复会返回"too frequent"， 暂未实现该case
+	public void testReplyNotNull() {
+		
 	}
 
 }

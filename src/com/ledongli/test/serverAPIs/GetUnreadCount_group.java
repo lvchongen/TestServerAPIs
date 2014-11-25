@@ -22,8 +22,8 @@ public class GetUnreadCount_group {
 		unreadCount.add(new BasicNameValuePair("app","api"));
 		unreadCount.add(new BasicNameValuePair("mod","group"));
 		unreadCount.add(new BasicNameValuePair("act","getUnreadCount"));
-		unreadCount.add(new BasicNameValuePair("uid","1"));
-		unreadCount.add(new BasicNameValuePair("password","111"));
+		unreadCount.add(new BasicNameValuePair("uid","2949163"));
+		unreadCount.add(new BasicNameValuePair("password","123456"));
 	}
 	
 	public String getExpectedResult() {
