@@ -14,7 +14,7 @@ public class GetNotifyList_Notify {
 		return notifyList;
 	}
 	
-	public GetNotifyList_Notify() {
+	public GetNotifyList_Notify(String uid,String password) {
 		
 		notifyList=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class GetNotifyList_Notify {
 		notifyList.add(new BasicNameValuePair("app","api"));
 		notifyList.add(new BasicNameValuePair("mod","Notify"));
 		notifyList.add(new BasicNameValuePair("act","getNotifyList"));
-		notifyList.add(new BasicNameValuePair("uid","2949163"));
-		notifyList.add(new BasicNameValuePair("password","123456"));
+		notifyList.add(new BasicNameValuePair("uid",uid));
+		notifyList.add(new BasicNameValuePair("password",password));
 		//可选参数
 //		notifyList.add(new BasicNameValuePair("since_id",""));
 //		notifyList.add(new BasicNameValuePair("max_id",""));

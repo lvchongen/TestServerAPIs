@@ -14,7 +14,7 @@ public class DoPostEdit {
 		return doPostEdit;
 	}
 	
-	public DoPostEdit(String weiba_id, String post_id) {
+	public DoPostEdit(String uid,String password,String weiba_id, String post_id) {
 		
 		doPostEdit=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class DoPostEdit {
 		doPostEdit.add(new BasicNameValuePair("app","api"));
 		doPostEdit.add(new BasicNameValuePair("mod","group"));
 		doPostEdit.add(new BasicNameValuePair("act","doPostEdit"));
-		doPostEdit.add(new BasicNameValuePair("uid","2949163"));
-		doPostEdit.add(new BasicNameValuePair("password","123456"));
+		doPostEdit.add(new BasicNameValuePair("uid",uid));
+		doPostEdit.add(new BasicNameValuePair("password",password));
 		doPostEdit.add(new BasicNameValuePair("weiba_id",weiba_id));
 		doPostEdit.add(new BasicNameValuePair("post_id",post_id));
 		doPostEdit.add(new BasicNameValuePair("content","This is for editing test"));

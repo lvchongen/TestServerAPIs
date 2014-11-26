@@ -14,15 +14,15 @@ public class GetMessageByListId {
 		return messageByListId;
 	}
 	
-	public GetMessageByListId(String list_id) {
+	public GetMessageByListId(String uid,String password,String list_id) {
 		messageByListId=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		messageByListId.add(new BasicNameValuePair("app","api"));
 		messageByListId.add(new BasicNameValuePair("mod","Message"));
 		messageByListId.add(new BasicNameValuePair("act","getMessageByListId"));
-		messageByListId.add(new BasicNameValuePair("uid","2949163"));
-		messageByListId.add(new BasicNameValuePair("password","123456"));
+		messageByListId.add(new BasicNameValuePair("uid",uid));
+		messageByListId.add(new BasicNameValuePair("password",password));
 		messageByListId.add(new BasicNameValuePair("id", list_id));
 //		messageByListId.add(new BasicNameValuePair("since_id", since_id));
 //		messageByListId.add(new BasicNameValuePair("max_id", max_id));

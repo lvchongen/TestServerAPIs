@@ -14,7 +14,7 @@ public class PostSet {
 		return postSet;
 	}
 	
-	public PostSet() {
+	public PostSet(String uid,String password) {
 		
 		postSet=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class PostSet {
 		postSet.add(new BasicNameValuePair("app","api"));
 		postSet.add(new BasicNameValuePair("mod","group"));
 		postSet.add(new BasicNameValuePair("act","postSet"));
-		postSet.add(new BasicNameValuePair("uid","1"));
-		postSet.add(new BasicNameValuePair("password","111"));
+		postSet.add(new BasicNameValuePair("uid",uid));
+		postSet.add(new BasicNameValuePair("password",password));
 		postSet.add(new BasicNameValuePair("post_id",""));
 		postSet.add(new BasicNameValuePair("currentValue",""));
 		postSet.add(new BasicNameValuePair("targetValue",""));

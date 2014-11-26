@@ -14,7 +14,7 @@ public class DelReply {
 		return delReply;
 	}
 	
-	public DelReply(String reply_id) {
+	public DelReply(String uid,String password,String reply_id) {
 		
 		delReply=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class DelReply {
 		delReply.add(new BasicNameValuePair("app","api"));
 		delReply.add(new BasicNameValuePair("mod","group"));
 		delReply.add(new BasicNameValuePair("act","delReply"));
-		delReply.add(new BasicNameValuePair("uid","2949163"));
-		delReply.add(new BasicNameValuePair("password","123456"));
+		delReply.add(new BasicNameValuePair("uid",uid));
+		delReply.add(new BasicNameValuePair("password",password));
 		delReply.add(new BasicNameValuePair("widget_appname","weiba"));
 		delReply.add(new BasicNameValuePair("reply_id",reply_id));
 	}

@@ -14,7 +14,7 @@ public class DeleteNotify {
 		return deleteNotify;
 	}
 	
-	public DeleteNotify(String message_id) {
+	public DeleteNotify(String uid,String password,String message_id) {
 		
 		deleteNotify=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class DeleteNotify {
 		deleteNotify.add(new BasicNameValuePair("app","api"));
 		deleteNotify.add(new BasicNameValuePair("mod","Notify"));
 		deleteNotify.add(new BasicNameValuePair("act","deleteNotify"));
-		deleteNotify.add(new BasicNameValuePair("uid","2949163"));
-		deleteNotify.add(new BasicNameValuePair("password","123456"));
+		deleteNotify.add(new BasicNameValuePair("uid",uid));
+		deleteNotify.add(new BasicNameValuePair("password",password));
 		deleteNotify.add(new BasicNameValuePair("id",message_id));
 	}
 	

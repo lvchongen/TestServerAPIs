@@ -9,29 +9,29 @@ import org.apache.http.message.BasicNameValuePair;
 public class Follow_Create {
 	//关注一个用户 follow_create
 		private List<NameValuePair> follow_create;
-		public Follow_Create(String uid) {
+		public Follow_Create(String uid,String password,String user_id) {
 			follow_create=new ArrayList<NameValuePair>();
 			
 			//定义Post参数
 			follow_create.add(new BasicNameValuePair("app","api"));
 			follow_create.add(new BasicNameValuePair("mod","User"));
 			follow_create.add(new BasicNameValuePair("act","follow_create"));
-			follow_create.add(new BasicNameValuePair("uid","2949163"));
-			follow_create.add(new BasicNameValuePair("password","123456"));
-			follow_create.add(new BasicNameValuePair("user_id",uid));
+			follow_create.add(new BasicNameValuePair("uid",uid));
+			follow_create.add(new BasicNameValuePair("password",password));
+			follow_create.add(new BasicNameValuePair("user_id",user_id));
 
 		}
 		
-		public Follow_Create(String userName, String password,String user_id) {
-			follow_create=new ArrayList<NameValuePair>();
-			
-			follow_create.add(new BasicNameValuePair("app","api"));
-			follow_create.add(new BasicNameValuePair("mod","User"));
-			follow_create.add(new BasicNameValuePair("act","follow_create"));
-			follow_create.add(new BasicNameValuePair("uid",userName));
-			follow_create.add(new BasicNameValuePair("password",password));
-			follow_create.add(new BasicNameValuePair("user_id",user_id));
-		}
+//		public Follow_Create(String uid,String password,String user_id) {
+//			follow_create=new ArrayList<NameValuePair>();
+//			
+//			follow_create.add(new BasicNameValuePair("app","api"));
+//			follow_create.add(new BasicNameValuePair("mod","User"));
+//			follow_create.add(new BasicNameValuePair("act","follow_create"));
+//			follow_create.add(new BasicNameValuePair("uid",uid));
+//			follow_create.add(new BasicNameValuePair("password",password));
+//			follow_create.add(new BasicNameValuePair("user_id",user_id));
+//		}
 		
 		public List<NameValuePair> getFollow_create() {
 			

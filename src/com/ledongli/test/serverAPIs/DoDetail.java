@@ -14,16 +14,16 @@ public class DoDetail {
 		return doDetail;
 	}
 	
-	public DoDetail(String id) {
+	public DoDetail(String uid,String password,String list_id) {
 		doDetail=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		doDetail.add(new BasicNameValuePair("app","api"));
 		doDetail.add(new BasicNameValuePair("mod","Message"));
 		doDetail.add(new BasicNameValuePair("act","doDetail"));
-		doDetail.add(new BasicNameValuePair("uid","2949163"));
-		doDetail.add(new BasicNameValuePair("password","123456"));
-		doDetail.add(new BasicNameValuePair("id",id));
+		doDetail.add(new BasicNameValuePair("uid",uid));
+		doDetail.add(new BasicNameValuePair("password",password));
+		doDetail.add(new BasicNameValuePair("id",list_id));
 	}
 	
 		public String getExpectedResult() {

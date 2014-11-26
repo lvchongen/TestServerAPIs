@@ -1,5 +1,6 @@
 package com.ledongli.test.serverAPIs;
 
+import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Updatedaily {
 		return updateList;
 	}
 	
-	public Updatedaily() throws Exception {
+	public Updatedaily(String uid,String password) throws Exception {
 		updateList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
@@ -31,8 +32,8 @@ public class Updatedaily {
 		
 		updateList.add(new BasicNameValuePair("stat", stat.toString()));
 		updateList.add(new BasicNameValuePair("action", "updatedaily"));
-		updateList.add(new BasicNameValuePair("uid", "1"));
-		updateList.add(new BasicNameValuePair("pc", "111"));
+		updateList.add(new BasicNameValuePair("uid", uid));
+		updateList.add(new BasicNameValuePair("pc", password));
 		
 		
 		

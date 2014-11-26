@@ -14,7 +14,7 @@ public class Atmelist {
 		return atmelist;
 	}
 	
-	public Atmelist() {
+	public Atmelist(String uid, String password) {
 		
 		atmelist=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class Atmelist {
 		atmelist.add(new BasicNameValuePair("app","api"));
 		atmelist.add(new BasicNameValuePair("mod","group"));
 		atmelist.add(new BasicNameValuePair("act","atmelist"));
-		atmelist.add(new BasicNameValuePair("uid","2949163"));
-		atmelist.add(new BasicNameValuePair("password","123456"));
+		atmelist.add(new BasicNameValuePair("uid",uid));
+		atmelist.add(new BasicNameValuePair("password",password));
 	}
 	
 	public String getExpectedResult() {

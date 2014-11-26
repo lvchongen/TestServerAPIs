@@ -11,6 +11,11 @@ import org.json.JSONObject;
 public class AddUser {
 	
 	private List<NameValuePair> addUser;
+	private String IOS_APN_token="bba5d957b38b92f91bcb45adfde23064af3239217caa518ec2ccc97166967897";
+
+	public String getIOS_APN_token() {
+		return IOS_APN_token;
+	}
 
 	public List<NameValuePair> getAddUser() {
 		return addUser;
@@ -23,7 +28,7 @@ public class AddUser {
 		//定义Post参数
 		JSONObject user=new JSONObject();
 		user.put("pc","123456");
-		user.put("IOS_APN_token", "bba5d957b38b92f91bcb45adfde23064af3239217caa518ec2ccc97166967897");
+		user.put("IOS_APN_token", IOS_APN_token);
 		addUser.add(new BasicNameValuePair("user",user.toString()));
 		addUser.add(new BasicNameValuePair("action","adduser"));		
 	}

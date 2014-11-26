@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.http.entity.mime.content.FileBody;
 import org.json.JSONArray;
@@ -32,13 +33,17 @@ public class GetEditorImgTest {
 	private FileBody fileBody;
 	private AnalyzeResult analyzeResult;
 	private SaveEditorImg saveEditorImg;
-
+	private String uid,password,weiba_id;
+	
 	@Before
 	public void setUp() {
 		//filePath="Images/LessImg.png";
 		filePath="Images/OK.gif";
 		networkService=new NetworkService();
-		url=networkService.getServer_staging();
+		url=networkService.getServer_IP();
+		uid=networkService.getUid();
+		password=networkService.getPassword();
+		weiba_id=networkService.getWeiba_id();
 		try{
 			fileBody=new FileBody(new File(filePath));
 		}
@@ -54,6 +59,7 @@ public class GetEditorImgTest {
 		postList=null;
 		doPostGroup=null;
 		fileBody=null;	
+		Thread.sleep(10000);
 	}
 
 	
@@ -64,7 +70,7 @@ public class GetEditorImgTest {
 			
 			//上传图片
 			fileBody=new FileBody(new File(filePath));
-			saveEditorImg=new SaveEditorImg(fileBody);
+			saveEditorImg=new SaveEditorImg(uid,password,fileBody);
 			String saveImgResult=networkService.sendPostStream(url, saveEditorImg.getSaveEditorImg());
 			
 			//解析图片URL
@@ -75,11 +81,11 @@ public class GetEditorImgTest {
 			//发帖
 			String imagesUrl="{\"image1\":\"" + imageUrl + "\"}";
 			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-			doPostGroup=new DoPostGroup("1000075",timeStamp,imagesUrl);
+			doPostGroup=new DoPostGroup(uid,password,weiba_id,timeStamp,imagesUrl);
 			String postGroupResult=networkService.sendPost(url, doPostGroup.getDoPost());
 			
 			//获取回复列表
-			postList=new PostList("1000075");
+			postList=new PostList(uid,password,weiba_id);
 			String postListResult=networkService.sendPost(url, postList.getPostList());
 			
 			//解析结果
@@ -93,7 +99,7 @@ public class GetEditorImgTest {
 				JSONObject obj=secondLevel.getJSONObject(i);
 				String post_uid=obj.getString("post_uid");
 				String title=obj.getString("title");
-				if(post_uid.equals("2949163") && title.equals(timeStamp)) {
+				if(post_uid.equals(uid) && title.equals(timeStamp)) {
 					post_id=obj.getString("post_id");
 					break;
 				}
@@ -101,9 +107,25 @@ public class GetEditorImgTest {
 			}
 			
 			//获取帖子图片
-			editorImg=new GetEditorImg("1000075", post_id);
+			editorImg=new GetEditorImg(uid,password,weiba_id, post_id);
 			String result=networkService.sendPost(url, editorImg.getEditorImg());
-			System.out.print(result);
+			boolean value=result.contains("\"status\":1");
+			
+			if(value==false) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                System.out.println();
+                System.out.println("================================================================");
+                System.out.println("Execute Time: "+ df.format(new Date()));
+                System.out.println("Test Class: "+ this.getClass().getName());
+                System.out.println("Server IP: "+ url);
+                System.out.println("uid: "+uid);
+                System.out.println("password: "+password);
+                System.out.println("Actual Result: "+ result);
+                System.out.println("================================================================");
+                
+            }
+			
+			assertTrue(value);
 		}
 		catch(Exception e) {
 			fail(e.getMessage());

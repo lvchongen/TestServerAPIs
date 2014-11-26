@@ -16,7 +16,7 @@ public class Addfriends {
 		return addfriendsList;
 	}
 	
-	public Addfriends(int[] friends) {
+	public Addfriends(String uid, String password, int[] friends) {
 		
 		addfriendsList=new ArrayList<NameValuePair>();
 		
@@ -25,8 +25,8 @@ public class Addfriends {
 		
 		addfriendsList.add(new BasicNameValuePair("friends",Arrays.toString(friends)));
 		addfriendsList.add(new BasicNameValuePair("action", "addfriends"));
-		addfriendsList.add(new BasicNameValuePair("uid", "2949163"));
-		addfriendsList.add(new BasicNameValuePair("pc", "123456"));	
+		addfriendsList.add(new BasicNameValuePair("uid", uid));
+		addfriendsList.add(new BasicNameValuePair("pc", password));	
 		
 	}
 	

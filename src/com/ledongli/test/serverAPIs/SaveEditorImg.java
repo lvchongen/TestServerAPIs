@@ -21,14 +21,14 @@ public class SaveEditorImg {
 		return httpEntity;
 	}
 	
-	public SaveEditorImg(FileBody fileBody) {
+	public SaveEditorImg(String uid,String password,FileBody fileBody) {
 		
 		MultipartEntityBuilder builder=MultipartEntityBuilder.create();
 		builder.addTextBody("app","api");
 		builder.addTextBody("mod","group");
 		builder.addTextBody("act","saveEditorImg");
-		builder.addTextBody("uid","2949163");
-		builder.addTextBody("password","123456");
+		builder.addTextBody("uid",uid);
+		builder.addTextBody("password",password);
 		builder.addPart("imgFile", fileBody);
 		
 		httpEntity=builder.build();

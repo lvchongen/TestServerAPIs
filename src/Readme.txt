@@ -1,11 +1,14 @@
-Test ID(Staging): 
-uid: 2949163 pwd: 123456
-uid:         pwd: 
+Staging:
+	uid: 2949163 pwd: 123456  nickname: test100@qq.com
+	uid£º 2951962 pwd: 123456
+	weiba_id: 1000075 (²âÊÔÌû×ÓÓÅ»¯°¡)
 
-messageID: 2783
 
-weiba_id: 100000, 1000075(æµ‹è¯•å¸–å­ä¼˜åŒ–å•Š)
-
-English
-
-Release 1.0
+Product:
+	uid:6736648  pwd:31415925  nickname:522844354@qq.com
+	uid: 6685641 pwd: 359535053460293
+	weiba_id: 1001897 (¿É¿Ú¿ÉÀÖ)
+	
+	
+1. Ã¿¸öcaseºóÌí¼ÓThread.sleep(5000); ÓÃÀ´½â¾ö·ÃÎÊ¹ı¿ìÔì³É·µ»ØÊ§°ÜµÄÎÊÌâ
+2. Ìí¼ÓÈ«¾Ö±äÁ¿ÓÃÀ´½â¾ö»·¾³ÎÊÌâ

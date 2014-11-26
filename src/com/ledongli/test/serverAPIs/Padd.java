@@ -16,7 +16,7 @@ public class Padd {
 		return paddList;
 	}
 	
-	public Padd() throws JSONException {
+	public Padd(String uid,String password) throws JSONException {
 		
 		paddList=new ArrayList<NameValuePair>();
 		
@@ -30,8 +30,8 @@ public class Padd {
 		
 		paddList.add(new BasicNameValuePair("poi", poi.toString()));
 		paddList.add(new BasicNameValuePair("action", "padd"));
-		paddList.add(new BasicNameValuePair("uid", "1"));
-		paddList.add(new BasicNameValuePair("pc", "111"));	
+		paddList.add(new BasicNameValuePair("uid", uid));
+		paddList.add(new BasicNameValuePair("pc", password));	
 		
 	}
 }

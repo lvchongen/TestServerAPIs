@@ -13,14 +13,14 @@ public class Findfriend {
 		return findFriend;
 	}
 	
-	public Findfriend(String name) {
+	public Findfriend(String uid,String password,String name) {
 			
 		findFriend=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		findFriend.add(new BasicNameValuePair("name", name));
 		findFriend.add(new BasicNameValuePair("action", "findfriend"));
-		findFriend.add(new BasicNameValuePair("uid", "2949163"));
-		findFriend.add(new BasicNameValuePair("pc", "123456"));
+		findFriend.add(new BasicNameValuePair("uid", uid));
+		findFriend.add(new BasicNameValuePair("pc", password));
 	}
 }

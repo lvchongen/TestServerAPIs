@@ -14,7 +14,7 @@ public class DoDeleteSession {
 		return doDeleteSession;
 	}
 	
-	public DoDeleteSession(String ids) {
+	public DoDeleteSession(String uid,String password,String ids) {
 		
 		doDeleteSession=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class DoDeleteSession {
 		doDeleteSession.add(new BasicNameValuePair("app","api"));
 		doDeleteSession.add(new BasicNameValuePair("mod","Message"));
 		doDeleteSession.add(new BasicNameValuePair("act","doDeleteSession"));
-		doDeleteSession.add(new BasicNameValuePair("uid","2949163"));
-		doDeleteSession.add(new BasicNameValuePair("password","123456"));
+		doDeleteSession.add(new BasicNameValuePair("uid",uid));
+		doDeleteSession.add(new BasicNameValuePair("password",password));
 		//doDeleteSession.add(new BasicNameValuePair("ids","2783"));
 		doDeleteSession.add(new BasicNameValuePair("ids",ids));
 	}

@@ -13,13 +13,13 @@ public class Getuserlimitedinfo {
 		return userlimitList;
 	}
 	
-	public Getuserlimitedinfo(String targetUid) {
+	public Getuserlimitedinfo(String uid,String password,String targetUid) {
 		userlimitList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		userlimitList.add(new BasicNameValuePair("targetUid", targetUid));
 		userlimitList.add(new BasicNameValuePair("action", "getuserlimitedinfo"));
-		userlimitList.add(new BasicNameValuePair("uid", "2949206"));
-		userlimitList.add(new BasicNameValuePair("pc", "123456"));
+		userlimitList.add(new BasicNameValuePair("uid", uid));
+		userlimitList.add(new BasicNameValuePair("pc", password));
 	}
 }

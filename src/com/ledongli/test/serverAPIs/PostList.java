@@ -14,7 +14,7 @@ public class PostList {
 		return postList;
 	}
 	
-	public PostList(String weiba_id) {
+	public PostList(String uid,String password,String weiba_id) {
 		
 		postList=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class PostList {
 		postList.add(new BasicNameValuePair("app","api"));
 		postList.add(new BasicNameValuePair("mod","group"));
 		postList.add(new BasicNameValuePair("act","postList"));
-		postList.add(new BasicNameValuePair("uid","2949163"));
-		postList.add(new BasicNameValuePair("password","123456"));
+		postList.add(new BasicNameValuePair("uid",uid));
+		postList.add(new BasicNameValuePair("password",password));
 		postList.add(new BasicNameValuePair("weiba_id",weiba_id));
 		postList.add(new BasicNameValuePair("page","1"));
 	}

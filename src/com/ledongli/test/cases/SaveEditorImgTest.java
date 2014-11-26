@@ -3,6 +3,8 @@ package com.ledongli.test.cases;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.http.entity.mime.content.FileBody;
 import org.junit.After;
@@ -21,11 +23,14 @@ public class SaveEditorImgTest {
 	private NetworkService networkService;
 	private SaveEditorImg saveEditorImg;
 	private String url;
+	private String uid,password;
 	
 	@Before
 	public void setUp() throws Exception {
 		networkService=new NetworkService();
-		url=networkService.getServer_staging();
+		url=networkService.getServer_IP();
+		uid=networkService.getUid();
+		password=networkService.getPassword();
 		imgLess="Images/LessImg.png";
 		imgMore="Images/MoreImg.png";
 	}
@@ -34,6 +39,7 @@ public class SaveEditorImgTest {
 	public void tearDown() throws Exception {
 		networkService=null;
 		saveEditorImg=null;
+		Thread.sleep(10000);
 	}
 	
 	//上传大于200K的图片，验证上传失败
@@ -42,10 +48,25 @@ public class SaveEditorImgTest {
 		try{
 			File file=new File(imgMore);
 			FileBody fileBody=new FileBody(file);
-			saveEditorImg=new SaveEditorImg(fileBody);
+			saveEditorImg=new SaveEditorImg(uid,password,fileBody);
 			String result=networkService.sendPostStream(url, saveEditorImg.getSaveEditorImg());
 			//System.out.print(result);
 			boolean value=result.contains("413 Request Entity Too Large");
+			
+			if(value==false) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                System.out.println();
+                System.out.println("================================================================");
+                System.out.println("Execute Time: "+ df.format(new Date()));
+                System.out.println("Test Class: "+ this.getClass().getName());
+                System.out.println("Server IP: "+ url);
+                System.out.println("uid: "+uid);
+                System.out.println("password: "+password);
+                System.out.println("Actual Result: "+ result);
+                System.out.println("================================================================");
+                
+            }
+			
 			assertTrue(value);
 			
 		}
@@ -60,7 +81,7 @@ public class SaveEditorImgTest {
 	public void testImgLess() {
 		try{
 			FileBody fileBody=new FileBody(new File(imgLess));
-			saveEditorImg=new SaveEditorImg(fileBody);
+			saveEditorImg=new SaveEditorImg(uid,password,fileBody);
 			String result=networkService.sendPostStream(url, saveEditorImg.getSaveEditorImg());
 			//System.out.print(result);
 			boolean value=result.contains("\"status\":1");

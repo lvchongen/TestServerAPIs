@@ -3,6 +3,8 @@ package com.ledongli.test.cases;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,19 +25,23 @@ public class AddfriendsTest {
 	private AddUser addUser;
 	private AnalyzeResult analyzeResult;
 	
+	private String uid,password;
+	
 	@Before
 	public void setUp() throws Exception {
 		
 		networkService=new NetworkService();
-		url=networkService.getServer_io_staging();
+		url=networkService.getServerIO_IP();
 		addUser=new AddUser();
-		
+		uid=networkService.getUid();
+		password=networkService.getPassword();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		addfriends=null;
 		networkService=null;
+		Thread.sleep(10000);
 	}
 
 	@Test
@@ -55,12 +61,25 @@ public class AddfriendsTest {
 			int friend2=Integer.parseInt(second_uid);
 			
 			int[] friend={friend1,friend2};
-			addfriends=new Addfriends(friend);
+			addfriends=new Addfriends(uid,password,friend);
 			String result=networkService.sendPost(url, addfriends.getAddfriendsList());
 			
-			System.out.print(result);
-			
 			boolean value=result.contains("\"status\":\"OK\"");
+			
+            if(value==false) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                System.out.println();
+                System.out.println("================================================================");
+                System.out.println("Execute Time: "+ df.format(new Date()));
+                System.out.println("Test Class: "+ this.getClass().getName());
+                System.out.println("Actual Result: "+ result);
+                System.out.println("Server IP: "+ url);
+                System.out.println("uid: "+uid);
+                System.out.println("password: "+password);
+                System.out.println("================================================================");
+                
+            }
+			
 			assertTrue(value);
 			
 			
@@ -72,23 +91,23 @@ public class AddfriendsTest {
 		
 	}
 	
-	@Test
-	public void testAddFriendsNull() {
-		try {
-			int[] friend=null;
-			addfriends=new Addfriends(friend);
-			String result=networkService.sendPost(url, addfriends.getAddfriendsList());
-			
-			System.out.print(result);
-			
-			boolean value=result.contains("\"status\":\"OK\"");
-			assertTrue(value);
-		}
-		catch(Exception e) {
-			fail(e.getMessage());
-		}
-		
-	}
+//	@Test
+//	public void testAddFriendsNull() {
+//		try {
+//			int[] friend=null;
+//			addfriends=new Addfriends(friend);
+//			String result=networkService.sendPost(url, addfriends.getAddfriendsList());
+//			
+//			System.out.print(result);
+//			
+//			boolean value=result.contains("\"status\":\"OK\"");
+//			assertTrue(value);
+//		}
+//		catch(Exception e) {
+//			fail(e.getMessage());
+//		}
+//		
+//	}
 
 	
 }

@@ -3,6 +3,8 @@ package com.ledongli.test.cases;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,11 +22,14 @@ public class DoDeleteTest {
 	private DoPost doPost;
 	private String urlString;
 	private AnalyzeResult analyzeResult;
+	private String uid,password;
 	
 	@Before
 	public void setUp() throws Exception {
 		networkService=new NetworkService();
-		urlString=networkService.getServer_staging();
+		urlString=networkService.getServer_IP();
+		uid=networkService.getUid();
+		password=networkService.getPassword();
 	}
 
 	@After
@@ -32,20 +37,33 @@ public class DoDeleteTest {
 		networkService=null;
 		doDelete=null;
 		doPost=null;
+		Thread.sleep(10000);
 	}
 
 	//创建新帖子并删除
 	@Test
 	public void test() {
 		try {
-			doPost=new DoPost("2949163");
+			doPost=new DoPost(uid,password,uid);
 			String content=networkService.sendPost(urlString, doPost.getDoPost());		
 			analyzeResult=new AnalyzeResult(content);
 			String list_id=analyzeResult.getValue("list_id");
-			doDelete=new DoDelete(list_id);
+			doDelete=new DoDelete(uid,password,list_id);
 			String result=networkService.sendPost(urlString, doDelete.getDoDelete());
+			boolean value=result.contains("{\"status\":1}");
 			
-			assertEquals("{\"status\":1}", result);
+			if(value==false) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                System.out.println();
+                System.out.println("================================================================");
+                System.out.println("Execute Time: "+ df.format(new Date()));
+                System.out.println("Test Class: "+ this.getClass().getName());
+                System.out.println("Actual Result: "+ result);
+                System.out.println("================================================================");
+                
+            }
+			
+			assertTrue(value);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -58,10 +76,26 @@ public class DoDeleteTest {
 	@Test
 	public void testNotExist() {
 		try{
-			doDelete=new DoDelete("");
+			doDelete=new DoDelete(uid,password,"");
 			String actualResult=networkService.sendPost(urlString, doDelete.getDoDelete());
 			//System.out.print(actualResult);
-			assertEquals("{\"status\":0}", actualResult);
+			boolean value=actualResult.equals("{\"status\":0}");
+			
+			if(value==false) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                System.out.println();
+                System.out.println("================================================================");
+                System.out.println("Execute Time: "+ df.format(new Date()));
+                System.out.println("Test Class: "+ this.getClass().getName());
+                System.out.println("Server IP: "+ urlString);
+                System.out.println("uid: "+uid);
+                System.out.println("password: "+password);
+                System.out.println("Actual Result: "+ actualResult);
+                System.out.println("================================================================");
+                
+            }
+			
+			assertTrue(value);
 		}
 		catch(Exception e) {
 			fail(e.getMessage());

@@ -14,7 +14,7 @@ public class SetRead {
 		return setRead;
 	}
 	
-	public SetRead() {
+	public SetRead(String uid,String password) {
 		
 		setRead=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class SetRead {
 		setRead.add(new BasicNameValuePair("app","api"));
 		setRead.add(new BasicNameValuePair("mod","Notify"));
 		setRead.add(new BasicNameValuePair("act","setRead"));
-		setRead.add(new BasicNameValuePair("uid","2949163"));
-		setRead.add(new BasicNameValuePair("password","123456"));
+		setRead.add(new BasicNameValuePair("uid",uid));
+		setRead.add(new BasicNameValuePair("password",password));
 	}
 	
 	public String getExpectedResult() {

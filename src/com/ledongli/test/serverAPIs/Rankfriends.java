@@ -14,13 +14,13 @@ public class Rankfriends {
 		return ranklList;
 	}
 	
-	public Rankfriends(Double date) {
+	public Rankfriends(String uid,String password,Double date) {
 		ranklList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		ranklList.add(new BasicNameValuePair("date", date.toString()));
 		ranklList.add(new BasicNameValuePair("action", "rankfriends"));
-		ranklList.add(new BasicNameValuePair("uid", "2949206"));
-		ranklList.add(new BasicNameValuePair("pc", "123456"));
+		ranklList.add(new BasicNameValuePair("uid", uid));
+		ranklList.add(new BasicNameValuePair("pc", password));
 	}
 }

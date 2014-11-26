@@ -18,7 +18,7 @@ public class Uadd {
 		return uaddList;
 	}
 	
-	public Uadd() throws Exception {
+	public Uadd(String uid,String password) throws Exception {
 		
 		uaddList=new ArrayList<NameValuePair>();
 		
@@ -37,8 +37,8 @@ public class Uadd {
 		
 		uaddList.add(new BasicNameValuePair("payload", payload.toString()));
 		uaddList.add(new BasicNameValuePair("action", "uadd"));
-		uaddList.add(new BasicNameValuePair("uid", "1"));
-		uaddList.add(new BasicNameValuePair("pc", "111"));		
+		uaddList.add(new BasicNameValuePair("uid", uid));
+		uaddList.add(new BasicNameValuePair("pc", password));		
 	}
 	
 	

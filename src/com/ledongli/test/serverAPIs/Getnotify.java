@@ -13,12 +13,12 @@ public class Getnotify {
 		return notifyList;
 	}
 	
-	public Getnotify() {
+	public Getnotify(String uid,String password) {
 		notifyList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		notifyList.add(new BasicNameValuePair("action", "getnotify"));
-		notifyList.add(new BasicNameValuePair("uid", "2949206"));
-		notifyList.add(new BasicNameValuePair("pc", "123456"));	
+		notifyList.add(new BasicNameValuePair("uid", uid));
+		notifyList.add(new BasicNameValuePair("pc", password));	
 	}
 }

@@ -14,7 +14,7 @@ public class RemoveFriends {
 		return removeFiends;
 	}
 	
-	public RemoveFriends(int[] friends) {
+	public RemoveFriends(String uid,String password,int[] friends) {
 		
 		removeFiends=new ArrayList<NameValuePair>();
 		
@@ -22,7 +22,7 @@ public class RemoveFriends {
 		
 		removeFiends.add(new BasicNameValuePair("friends", Arrays.toString(friends)));
 		removeFiends.add(new BasicNameValuePair("action", "removefriends"));
-		removeFiends.add(new BasicNameValuePair("uid", "2949163"));
-		removeFiends.add(new BasicNameValuePair("pc", "123456"));
+		removeFiends.add(new BasicNameValuePair("uid", uid));
+		removeFiends.add(new BasicNameValuePair("pc", password));
 	}
 }

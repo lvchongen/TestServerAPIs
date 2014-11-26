@@ -22,7 +22,7 @@ public class DeleteNotifyTest {
 	@Before
 	public void setUp() throws Exception {
 		networkService=new NetworkService();
-		url=networkService.getServer_staging();
+		url=networkService.getServer_IP();
 		
 	}
 
@@ -31,6 +31,7 @@ public class DeleteNotifyTest {
 		doPost=null;
 		//deleteNotify=null;
 		analyzeResult=null;
+		Thread.sleep(10000);
 	}
 
 	@Test

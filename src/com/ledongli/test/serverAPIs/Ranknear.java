@@ -13,7 +13,7 @@ public class Ranknear {
 		return ranknearList;
 	}
 	
-	public Ranknear(Double date) {
+	public Ranknear(String uid,String password,Double date) {
 		ranknearList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
@@ -21,7 +21,7 @@ public class Ranknear {
 		ranknearList.add(new BasicNameValuePair("lat", "0"));
 		ranknearList.add(new BasicNameValuePair("lon", "0"));
 		ranknearList.add(new BasicNameValuePair("action", "ranknear"));
-		ranknearList.add(new BasicNameValuePair("uid", "2949206"));
-		ranknearList.add(new BasicNameValuePair("pc", "123456"));	
+		ranknearList.add(new BasicNameValuePair("uid", uid));
+		ranknearList.add(new BasicNameValuePair("pc",password));	
 	}
 }

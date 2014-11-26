@@ -14,7 +14,7 @@ public class DoPost {
 		return doPost;
 	}
 
-	public DoPost(String user_id) {
+	public DoPost(String uid,String password,String user_id) {
 		
 		doPost=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class DoPost {
 		doPost.add(new BasicNameValuePair("app","api"));
 		doPost.add(new BasicNameValuePair("mod","Message"));
 		doPost.add(new BasicNameValuePair("act","doPost"));
-		doPost.add(new BasicNameValuePair("uid","2949163"));
-		doPost.add(new BasicNameValuePair("password","123456"));
+		doPost.add(new BasicNameValuePair("uid",uid));
+		doPost.add(new BasicNameValuePair("password",password));
 		doPost.add(new BasicNameValuePair("to",user_id));
 		doPost.add(new BasicNameValuePair("content","This is Test"));
 		doPost.add(new BasicNameValuePair("type","1"));

@@ -14,15 +14,15 @@ public class User_Friends {
 		return user_friends;
 	}
 
-	public User_Friends(String user_id) {
+	public User_Friends(String uid,String password,String user_id) {
 		user_friends=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		user_friends.add(new BasicNameValuePair("app","api"));
 		user_friends.add(new BasicNameValuePair("mod","User"));
 		user_friends.add(new BasicNameValuePair("act","user_friends"));
-		user_friends.add(new BasicNameValuePair("uid","2949163"));
-		user_friends.add(new BasicNameValuePair("password","123456"));
+		user_friends.add(new BasicNameValuePair("uid",uid));
+		user_friends.add(new BasicNameValuePair("password",password));
 		user_friends.add(new BasicNameValuePair("user_id",user_id));
 	}
 	

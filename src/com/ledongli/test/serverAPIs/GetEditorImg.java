@@ -14,7 +14,7 @@ public class GetEditorImg {
 		return editorImg;
 	}
 	
-	public GetEditorImg(String weiba_id,String post_id) {
+	public GetEditorImg(String uid,String password,String weiba_id,String post_id) {
 		
 		editorImg=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class GetEditorImg {
 		editorImg.add(new BasicNameValuePair("app","api"));
 		editorImg.add(new BasicNameValuePair("mod","group"));
 		editorImg.add(new BasicNameValuePair("act","getEditorImg"));
-		editorImg.add(new BasicNameValuePair("uid","2949163"));
-		editorImg.add(new BasicNameValuePair("password","123456"));
+		editorImg.add(new BasicNameValuePair("uid",uid));
+		editorImg.add(new BasicNameValuePair("password",password));
 		editorImg.add(new BasicNameValuePair("weiba_id",weiba_id));
 		editorImg.add(new BasicNameValuePair("post_id",post_id));
 	}

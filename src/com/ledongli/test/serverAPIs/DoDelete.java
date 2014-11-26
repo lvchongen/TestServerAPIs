@@ -16,7 +16,7 @@ public class DoDelete {
 		return doDelete;
 	}
 	
-	public DoDelete(String idsString) {
+	public DoDelete(String uid,String password,String idsString) {
 		
 		doDelete=new ArrayList<NameValuePair>();
 		
@@ -24,8 +24,8 @@ public class DoDelete {
 		doDelete.add(new BasicNameValuePair("app","api"));
 		doDelete.add(new BasicNameValuePair("mod","Message"));
 		doDelete.add(new BasicNameValuePair("act","doDelete"));
-		doDelete.add(new BasicNameValuePair("uid","2949163"));
-		doDelete.add(new BasicNameValuePair("password","123456"));
+		doDelete.add(new BasicNameValuePair("uid",uid));
+		doDelete.add(new BasicNameValuePair("password",password));
 		doDelete.add(new BasicNameValuePair("ids",idsString));
 	}
 	

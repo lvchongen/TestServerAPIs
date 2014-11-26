@@ -14,15 +14,15 @@ public class DoInBox {
 		return doInBox;
 	}
 
-	public DoInBox() {
+	public DoInBox(String uid,String password) {
 		doInBox=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		doInBox.add(new BasicNameValuePair("app","api"));
 		doInBox.add(new BasicNameValuePair("mod","Message"));
 		doInBox.add(new BasicNameValuePair("act","doInbox"));
-		doInBox.add(new BasicNameValuePair("uid","2949163"));
-		doInBox.add(new BasicNameValuePair("password","123456"));
+		doInBox.add(new BasicNameValuePair("uid",uid));
+		doInBox.add(new BasicNameValuePair("password",password));
 		
 		//可选参数
 //		doInBox.add(new BasicNameValuePair("since_id",""));

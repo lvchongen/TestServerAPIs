@@ -13,22 +13,21 @@ import org.apache.http.message.BasicNameValuePair;
 public class Follow_Destory {
 	
 	private List<NameValuePair> follow_destory;
-	private String user_id;
 	
 	public List<NameValuePair> getFollow_destory() {
 		return follow_destory;
 	}
 
-	public Follow_Destory(String _user_id) {
-		user_id=_user_id;
+	public Follow_Destory(String uid,String password,String user_id) {
+		
 		follow_destory=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		follow_destory.add(new BasicNameValuePair("app","api"));
 		follow_destory.add(new BasicNameValuePair("mod","User"));
 		follow_destory.add(new BasicNameValuePair("act","follow_destroy"));
-		follow_destory.add(new BasicNameValuePair("uid","2949163"));
-		follow_destory.add(new BasicNameValuePair("password","123456"));
+		follow_destory.add(new BasicNameValuePair("uid",uid));
+		follow_destory.add(new BasicNameValuePair("password",password));
 		follow_destory.add(new BasicNameValuePair("user_id",user_id));
 	}
 	

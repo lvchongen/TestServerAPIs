@@ -13,12 +13,12 @@ public class ListFriends {
 		return friendsList;
 	}
 	
-	public ListFriends() {
+	public ListFriends(String uid,String password) {
 		friendsList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		friendsList.add(new BasicNameValuePair("action", "listfriends"));
-		friendsList.add(new BasicNameValuePair("uid", "2949163"));
-		friendsList.add(new BasicNameValuePair("pc", "123456"));	
+		friendsList.add(new BasicNameValuePair("uid", uid));
+		friendsList.add(new BasicNameValuePair("pc", password));	
 	}
 }

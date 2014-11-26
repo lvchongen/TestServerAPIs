@@ -14,7 +14,7 @@ public class DoSetIsRead {
 		return doSetIsRead;
 	}
 	
-	public DoSetIsRead() {
+	public DoSetIsRead(String uid,String password) {
 		
 		doSetIsRead=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class DoSetIsRead {
 		doSetIsRead.add(new BasicNameValuePair("app","api"));
 		doSetIsRead.add(new BasicNameValuePair("mod","Message"));
 		doSetIsRead.add(new BasicNameValuePair("act","doSetIsRead"));
-		doSetIsRead.add(new BasicNameValuePair("uid","2949163"));
-		doSetIsRead.add(new BasicNameValuePair("password","123456"));
+		doSetIsRead.add(new BasicNameValuePair("uid",uid));
+		doSetIsRead.add(new BasicNameValuePair("password",password));
 		doSetIsRead.add(new BasicNameValuePair("ids","2783"));
 	}
 	

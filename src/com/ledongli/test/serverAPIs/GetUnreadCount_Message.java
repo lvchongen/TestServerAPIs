@@ -14,7 +14,7 @@ private List<NameValuePair> unReadCount;
 		return unReadCount;
 	}
 
-	public GetUnreadCount_Message() {
+	public GetUnreadCount_Message(String uid,String password) {
 		
 		unReadCount=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ private List<NameValuePair> unReadCount;
 		unReadCount.add(new BasicNameValuePair("app","api"));
 		unReadCount.add(new BasicNameValuePair("mod","Message"));
 		unReadCount.add(new BasicNameValuePair("act","getUnreadCount"));
-		unReadCount.add(new BasicNameValuePair("uid","2949163"));
-		unReadCount.add(new BasicNameValuePair("password","123456"));
+		unReadCount.add(new BasicNameValuePair("uid",uid));
+		unReadCount.add(new BasicNameValuePair("password",password));
 	}
 	
 	public String getExpectedResult() {

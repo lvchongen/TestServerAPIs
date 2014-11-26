@@ -28,35 +28,99 @@ public class NetworkService {
 	private CloseableHttpResponse response;
 	private HttpEntity entity;
 	private String result;
+	private String server_IP;
+	private String serverIO_IP;
+	private String weiba_id;
+	private String uid,uid_2;
+	private String password,password_2;
 	
-	public NetworkService() {
+
+	//判断Staging服务器和Product服务器  serverValue=1 为Staging， 2为Product
+	private int serverValue=2;
+	
+	public NetworkService(){
 		httpclient = HttpClients.createDefault();
+		
+		setServer(serverValue);
 	}
 	
-	//迁移服务器后地址
-	//private String server_staging="http://121.40.189.41/xq/index.php";
-	//http://121.40.189.41/xq/index.php?act=getHots&mod=Group&v=3.1%20android&vc=310%20android
-	
-	//定义测试服务器
-	private String server_staging="http://social.api.ledongli.cn:8090/staging/index.php";
+	private void setServer(int serverValue) {
+		switch (serverValue) {
+		case 1:
+			server_IP="http://social.api.ledongli.cn:8090/staging/index.php";
+			serverIO_IP="http://core.api.ledongli.cn/staging/io.ashx?";
+			weiba_id="1000075"; //测试帖子优化啊
+			uid="2949163";
+			password="123456";
+			uid_2="2951962";
+			password_2="123456";
+			break;
+
+		case 2:
+			server_IP="http://social.api.ledongli.cn:8090/xq/index.php";
+			serverIO_IP="http://core.api.ledongli.cn/xq/io.ashx";
+			weiba_id="1001897"; //可口可乐
+			uid="6736648";
+			password="863162020225227";
+			uid_2="6685641";
+			password_2="359535053460293";
+			break;
+			
+		case 3:
+			server_IP="http://121.40.189.41:8090/xq/index.php";
+			serverIO_IP="http://121.40.189.41/xq/io.ashx?";
+			weiba_id="1001897"; //可口可乐
+			uid="6736648";
+			password="863162020225227";
+			uid_2="6685641";
+			password_2="359535053460293";
+			break;
+			
+		case 4:
+			server_IP="http://112.124.8.165/xq/index.php";
+			serverIO_IP="http://112.124.8.165/xq/io.ashx?";
+			weiba_id="1001897"; //可口可乐
+			uid="6736648";
+			password="31415926";
+			uid_2="6685641";
+			password_2="359535053460293";
+			break;
+		}
 		
-	public String getServer_staging() {
-		return server_staging;
+		
+	}
+	
+	
+	public String getWeiba_id() {
+		return weiba_id;
 	}
 		
-		
-	private String server_xq_test="http://social.api.ledongli.cn:8090/xq_test/index.php";
-		
-	public String getServer_xq_test() {
-		return server_xq_test;
+	public String getServer_IP() {
+		return server_IP;
 	}
 	
-	private String server_io_staging="http://core.api.ledongli.cn/staging/io.ashx?";
+	public String getServerIO_IP() {
+		return serverIO_IP;
+	}
 	
-	public String getServer_io_staging() {
-		return server_io_staging;
+	public String getUid() {
+		return uid;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+	
+	public String getUid_2() {
+		return uid_2;
+	}
+
+	public String getPassword_2() {
+		return password_2;
+	}
+	
+	
+	//定义SendPost 方法
 	public String sendPost(String url, List<NameValuePair> content) throws IOException{
 		
 		httpPost=new HttpPost(url);
@@ -77,6 +141,8 @@ public class NetworkService {
 		
 	}
 	
+	
+	//定义SendPostStream方法
 	public String sendPostStream(String url, HttpEntity entity) throws IOException{
 		
 		httpPost=new HttpPost(url);

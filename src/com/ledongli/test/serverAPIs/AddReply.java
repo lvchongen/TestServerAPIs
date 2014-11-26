@@ -14,7 +14,7 @@ public class AddReply {
 		return addReply;
 	}
 	
-	public AddReply(String weiba_id, String post_id, String post_uid,String content) {
+	public AddReply(String uid,String password, String weiba_id, String post_id, String post_uid,String content) {
 		
 		addReply=new ArrayList<NameValuePair>(); 
 		
@@ -22,8 +22,8 @@ public class AddReply {
 		addReply.add(new BasicNameValuePair("app","api"));
 		addReply.add(new BasicNameValuePair("mod","group"));
 		addReply.add(new BasicNameValuePair("act","addReply"));
-		addReply.add(new BasicNameValuePair("uid","2949163"));
-		addReply.add(new BasicNameValuePair("password","123456"));
+		addReply.add(new BasicNameValuePair("uid",uid));
+		addReply.add(new BasicNameValuePair("password",password));
 		addReply.add(new BasicNameValuePair("weiba_id",weiba_id));
 		addReply.add(new BasicNameValuePair("post_id",post_id));
 		addReply.add(new BasicNameValuePair("post_uid",post_uid));

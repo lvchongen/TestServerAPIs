@@ -14,7 +14,7 @@ public class User_Following {
 		return user_following;
 	}
 
-	public User_Following() {
+	public User_Following(String uid,String password, String user_id) {
 		
 		user_following=new ArrayList<NameValuePair>();
 		
@@ -22,9 +22,9 @@ public class User_Following {
 		user_following.add(new BasicNameValuePair("app","api"));
 		user_following.add(new BasicNameValuePair("mod","User"));
 		user_following.add(new BasicNameValuePair("act","user_following"));
-		user_following.add(new BasicNameValuePair("uid","2949163"));
-		user_following.add(new BasicNameValuePair("password","123456"));
-		user_following.add(new BasicNameValuePair("user_id","2949163"));
+		user_following.add(new BasicNameValuePair("uid",uid));
+		user_following.add(new BasicNameValuePair("password",password));
+		user_following.add(new BasicNameValuePair("user_id",user_id));
 	}
 	
 	public String getExpectedResult() {

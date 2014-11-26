@@ -14,7 +14,7 @@ public class User_applicant {
 		return user_applicant;
 	}
 	
-	public User_applicant() {
+	public User_applicant(String uid,String password) {
 		
 		user_applicant=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class User_applicant {
 		user_applicant.add(new BasicNameValuePair("app","api"));
 		user_applicant.add(new BasicNameValuePair("mod","user"));
 		user_applicant.add(new BasicNameValuePair("act","user_applicant"));
-		user_applicant.add(new BasicNameValuePair("uid","2949163"));
-		user_applicant.add(new BasicNameValuePair("password","123456"));
+		user_applicant.add(new BasicNameValuePair("uid",uid));
+		user_applicant.add(new BasicNameValuePair("password",password));
 	}
 	
 	public String getExpectedResult() {

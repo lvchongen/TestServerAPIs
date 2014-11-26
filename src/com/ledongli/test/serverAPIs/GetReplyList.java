@@ -14,7 +14,7 @@ public class GetReplyList {
 		return replyList;
 	}
 	
-	public GetReplyList(String post_id,String weiba_id) {
+	public GetReplyList(String uid,String password,String post_id,String weiba_id) {
 		
 		replyList=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class GetReplyList {
 		replyList.add(new BasicNameValuePair("app","api"));
 		replyList.add(new BasicNameValuePair("mod","group"));
 		replyList.add(new BasicNameValuePair("act","getReplyList"));
-		replyList.add(new BasicNameValuePair("uid","2949163"));
-		replyList.add(new BasicNameValuePair("password","123456"));
+		replyList.add(new BasicNameValuePair("uid",uid));
+		replyList.add(new BasicNameValuePair("password",password));
 		replyList.add(new BasicNameValuePair("post_id",post_id));
 		replyList.add(new BasicNameValuePair("weiba_id",weiba_id));
 		replyList.add(new BasicNameValuePair("page","1"));

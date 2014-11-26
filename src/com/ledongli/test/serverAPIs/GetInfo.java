@@ -13,12 +13,12 @@ public class GetInfo {
 		return getInfoList;
 	}
 	
-	public GetInfo() {
+	public GetInfo(String uid,String password) {
 		getInfoList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		getInfoList.add(new BasicNameValuePair("action", "getinfo"));
-		getInfoList.add(new BasicNameValuePair("uid", "2949206"));
-		getInfoList.add(new BasicNameValuePair("pc", "123456"));
+		getInfoList.add(new BasicNameValuePair("uid", uid));
+		getInfoList.add(new BasicNameValuePair("pc", password));
 	}
 }

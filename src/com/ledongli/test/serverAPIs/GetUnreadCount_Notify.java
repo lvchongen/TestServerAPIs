@@ -14,15 +14,15 @@ public class GetUnreadCount_Notify {
 		return unreadCount;
 	}
 	
-	public GetUnreadCount_Notify() {
+	public GetUnreadCount_Notify(String uid,String password) {
 		unreadCount=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		unreadCount.add(new BasicNameValuePair("app","api"));
 		unreadCount.add(new BasicNameValuePair("mod","Notify"));
 		unreadCount.add(new BasicNameValuePair("act","getUnreadCount"));
-		unreadCount.add(new BasicNameValuePair("uid","2949163"));
-		unreadCount.add(new BasicNameValuePair("password","123456"));
+		unreadCount.add(new BasicNameValuePair("uid",uid));
+		unreadCount.add(new BasicNameValuePair("password",password));
 		
 		
 		

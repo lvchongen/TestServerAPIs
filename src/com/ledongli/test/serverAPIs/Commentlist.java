@@ -14,7 +14,7 @@ public class Commentlist {
 		return commentList;
 	}
 	
-	public Commentlist() {
+	public Commentlist(String uid, String password) {
 		
 		commentList=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class Commentlist {
 		commentList.add(new BasicNameValuePair("app","api"));
 		commentList.add(new BasicNameValuePair("mod","group"));
 		commentList.add(new BasicNameValuePair("act","commentList"));
-		commentList.add(new BasicNameValuePair("uid","2949163"));
-		commentList.add(new BasicNameValuePair("password","123456"));
+		commentList.add(new BasicNameValuePair("uid",uid));
+		commentList.add(new BasicNameValuePair("password",password));
 	}
 	
 	public String getExpectedResult() {

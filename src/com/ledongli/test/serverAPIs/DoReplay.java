@@ -14,15 +14,15 @@ public class DoReplay {
 		return doReply;
 	}
 	
-	public DoReplay(String id) {
+	public DoReplay(String uid,String password,String id) {
 		doReply=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		doReply.add(new BasicNameValuePair("app","api"));
 		doReply.add(new BasicNameValuePair("mod","Message"));
 		doReply.add(new BasicNameValuePair("act","doReply"));
-		doReply.add(new BasicNameValuePair("uid","2949163"));
-		doReply.add(new BasicNameValuePair("password","123456"));
+		doReply.add(new BasicNameValuePair("uid",uid));
+		doReply.add(new BasicNameValuePair("password",password));
 		doReply.add(new BasicNameValuePair("to",id));
 		doReply.add(new BasicNameValuePair("id","236"));
 		doReply.add(new BasicNameValuePair("reply_content","This is a replay"));

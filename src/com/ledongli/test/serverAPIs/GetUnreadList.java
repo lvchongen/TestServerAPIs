@@ -14,7 +14,7 @@ public class GetUnreadList {
 		return unreadList;
 	}
 	
-	public GetUnreadList() {
+	public GetUnreadList(String uid,String password) {
 		
 		unreadList=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class GetUnreadList {
 		unreadList.add(new BasicNameValuePair("app","api"));
 		unreadList.add(new BasicNameValuePair("mod","Notify"));
 		unreadList.add(new BasicNameValuePair("act","getUnreadList"));
-		unreadList.add(new BasicNameValuePair("uid","2949163"));
-		unreadList.add(new BasicNameValuePair("password","123456"));
+		unreadList.add(new BasicNameValuePair("uid",uid));
+		unreadList.add(new BasicNameValuePair("password",password));
 		//可选参数
 //		unreadList.add(new BasicNameValuePair("since_id",""));
 //		unreadList.add(new BasicNameValuePair("max_id",""));

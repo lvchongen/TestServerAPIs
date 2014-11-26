@@ -13,14 +13,14 @@ public class Listfans {
 		return fansList;
 	}
 	
-	public Listfans() {
+	public Listfans(String uid,String password) {
 		
 		fansList=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		fansList.add(new BasicNameValuePair("action", "listfans"));
-		fansList.add(new BasicNameValuePair("uid", "2949163"));
-		fansList.add(new BasicNameValuePair("pc", "123456"));	
+		fansList.add(new BasicNameValuePair("uid", uid));
+		fansList.add(new BasicNameValuePair("pc", password));	
 		
 	}
 }

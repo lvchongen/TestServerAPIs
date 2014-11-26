@@ -14,7 +14,7 @@ public class Follow_destory_reverse {
 		return follow_destory_reverse;
 	}
 	
-	public Follow_destory_reverse(String user_id) {
+	public Follow_destory_reverse(String uid,String password,String user_id) {
 		
 		follow_destory_reverse=new ArrayList<NameValuePair>();
 		
@@ -22,8 +22,8 @@ public class Follow_destory_reverse {
 		follow_destory_reverse.add(new BasicNameValuePair("app","api"));
 		follow_destory_reverse.add(new BasicNameValuePair("mod","user"));
 		follow_destory_reverse.add(new BasicNameValuePair("act","follow_destroy_reverse"));
-		follow_destory_reverse.add(new BasicNameValuePair("uid","2949163"));
-		follow_destory_reverse.add(new BasicNameValuePair("password","123456"));
+		follow_destory_reverse.add(new BasicNameValuePair("uid",uid));
+		follow_destory_reverse.add(new BasicNameValuePair("password",password));
 		follow_destory_reverse.add(new BasicNameValuePair("user_id",user_id));
 	}
 	

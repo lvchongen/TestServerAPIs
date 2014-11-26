@@ -19,16 +19,16 @@ public class DoPostGroup {
 	
 	
 	//发帖
-	public DoPostGroup() {
+	public DoPostGroup(String uid,String password,String weiba_id) {
 		doPost=new ArrayList<NameValuePair>();
 		
 		//定义Post参数
 		doPost.add(new BasicNameValuePair("app","api"));
 		doPost.add(new BasicNameValuePair("mod","group"));
 		doPost.add(new BasicNameValuePair("act","doPost"));
-		doPost.add(new BasicNameValuePair("uid","2949163"));
-		doPost.add(new BasicNameValuePair("password","123456"));
-		doPost.add(new BasicNameValuePair("weiba_id","1000075"));
+		doPost.add(new BasicNameValuePair("uid",uid));
+		doPost.add(new BasicNameValuePair("password",password));
+		doPost.add(new BasicNameValuePair("weiba_id",weiba_id));
 		doPost.add(new BasicNameValuePair("content","This is Test"));
 		doPost.add(new BasicNameValuePair("title","Test Title"));
 		
@@ -36,28 +36,28 @@ public class DoPostGroup {
 		//doPost.add(new BasicNameValuePair("imgUrls",""));
 	}
 	
-	public DoPostGroup(String weiba_id, String title) {
+	public DoPostGroup(String uid,String password,String weiba_id, String title) {
 		doPost=new ArrayList<NameValuePair>();
 		
 		doPost.add(new BasicNameValuePair("app","api"));
 		doPost.add(new BasicNameValuePair("mod","group"));
 		doPost.add(new BasicNameValuePair("act","doPost"));
-		doPost.add(new BasicNameValuePair("uid","2949163"));
-		doPost.add(new BasicNameValuePair("password","123456"));
+		doPost.add(new BasicNameValuePair("uid",uid));
+		doPost.add(new BasicNameValuePair("password",password));
 		doPost.add(new BasicNameValuePair("weiba_id",weiba_id));
 		doPost.add(new BasicNameValuePair("content","This is Test"));
 		doPost.add(new BasicNameValuePair("title",title));
 	}
 	
-	public DoPostGroup(String weiba_id, String title, String images) {
+	public DoPostGroup(String uid,String password,String weiba_id, String title, String images) {
 		
 		doPost=new ArrayList<NameValuePair>();
 		
 		doPost.add(new BasicNameValuePair("app","api"));
 		doPost.add(new BasicNameValuePair("mod","group"));
 		doPost.add(new BasicNameValuePair("act","doPost"));
-		doPost.add(new BasicNameValuePair("uid","2949163"));
-		doPost.add(new BasicNameValuePair("password","123456"));
+		doPost.add(new BasicNameValuePair("uid",uid));
+		doPost.add(new BasicNameValuePair("password",password));
 		doPost.add(new BasicNameValuePair("weiba_id",weiba_id));
 		doPost.add(new BasicNameValuePair("content","This is Test"));
 		doPost.add(new BasicNameValuePair("title",title));
