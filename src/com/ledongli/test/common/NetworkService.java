@@ -9,6 +9,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -124,6 +125,8 @@ public class NetworkService {
 	public String sendPost(String url, List<NameValuePair> content) throws IOException{
 		
 		httpPost=new HttpPost(url);
+		RequestConfig config=RequestConfig.custom().setSocketTimeout(10000).setConnectTimeout(10000).build();
+		httpPost.setConfig(config);
 		httpPost.setEntity(new UrlEncodedFormEntity(content));
 		try {
 			response=httpclient.execute(httpPost);
