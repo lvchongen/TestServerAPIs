@@ -37,7 +37,7 @@ public class NetworkService {
 	
 
 	//判断Staging服务器和Product服务器  serverValue=1 为Staging， 2为Product
-	private int serverValue=2;
+	private int serverValue=1;
 	
 	public NetworkService(){
 		httpclient = HttpClients.createDefault();

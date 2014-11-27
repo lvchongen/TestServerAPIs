@@ -19,6 +19,7 @@ public class UserApplicantTest {
 	private String url;
 	private User_applicant user_applicant;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class UserApplicantTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, user_applicant.getUser_application());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":1");
 			
 			if(value==false) {

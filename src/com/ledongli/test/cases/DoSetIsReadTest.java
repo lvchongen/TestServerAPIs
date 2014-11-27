@@ -21,6 +21,7 @@ public class DoSetIsReadTest {
 	private String url;
 	private DoSetIsRead doSetIsRead;
 	private String uid,password;
+	private int i=0;
 	
 	
 	@Before
@@ -43,6 +44,16 @@ public class DoSetIsReadTest {
 	public void test() {
 		try {
 			String actualString=networkService.sendPost(url, doSetIsRead.getDoSetIsRead());
+			while(i<3) {
+		        if(actualString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 //			System.out.print(actualString);
 			boolean result=false;
 			if(actualString.contains("{\"status\":1}"))

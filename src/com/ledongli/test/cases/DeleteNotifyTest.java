@@ -18,6 +18,7 @@ public class DeleteNotifyTest {
 	DeleteNotify deleteNotify;
 	DoPost doPost;
 	AnalyzeResult analyzeResult;
+	int i=0;
 	
 	@Before
 	public void setUp() throws Exception {

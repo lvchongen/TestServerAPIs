@@ -19,6 +19,7 @@ public class DoReplyTest {
 	private String url;
 	private DoReplay doReply;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class DoReplyTest {
 		try {
 			doReply=new DoReplay(uid,password,uid);
 			String actualString=networkService.sendPost(url, doReply.getDoReplay());
+			while(i<3) {
+		        if(actualString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean result=actualString.contains("\\u79c1\\u4fe1\\u53d1\\u9001\\u6210\\u529f");
 			
 			if(result==false) {

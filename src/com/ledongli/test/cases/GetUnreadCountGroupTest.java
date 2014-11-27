@@ -18,6 +18,7 @@ public class GetUnreadCountGroupTest {
 	private String url;
 	private GetUnreadCount_group count_group;
 	private String uid,password;
+	private int i=0;
 
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class GetUnreadCountGroupTest {
 		
 		try {
 			String result=networkService.sendPost(url, count_group.getUnreadCount());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":1") && result.contains("unread_comment") && result.contains("new_applicant_count");
 			
 			if(value==false) {

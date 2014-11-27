@@ -23,6 +23,7 @@ public class DoDeleteTest {
 	private String urlString;
 	private AnalyzeResult analyzeResult;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -42,30 +43,42 @@ public class DoDeleteTest {
 
 	//创建新帖子并删除
 	@Test
-	public void test() {
+	public void test()  {
 		try {
-			doPost=new DoPost(uid,password,uid);
-			String content=networkService.sendPost(urlString, doPost.getDoPost());		
-			analyzeResult=new AnalyzeResult(content);
-			String list_id=analyzeResult.getValue("list_id");
-			doDelete=new DoDelete(uid,password,list_id);
-			String result=networkService.sendPost(urlString, doDelete.getDoDelete());
-			boolean value=result.contains("{\"status\":1}");
+				doPost=new DoPost(uid,password,uid);
+				String content=networkService.sendPost(urlString, doPost.getDoPost());		
+				analyzeResult=new AnalyzeResult(content);
+				String list_id=analyzeResult.getValue("list_id");
+				doDelete=new DoDelete(uid,password,list_id);
+				String result=networkService.sendPost(urlString, doDelete.getDoDelete());
+				
+				while(i<3) {
+			        if(result.contains("time out")) {
+			          i++;
+			          Thread.sleep(3000);
+			          test();
+			        }
+			        else {
+			          break;
+			        }
+			      }
+				
+				boolean value=result.contains("{\"status\":1}");
+				
+				if(value==false) {
+	                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	                System.out.println();
+	                System.out.println("================================================================");
+	                System.out.println("Execute Time: "+ df.format(new Date()));
+	                System.out.println("Test Class: "+ this.getClass().getName());
+	                System.out.println("Actual Result: "+ result);
+	                System.out.println("================================================================");
+	                
+	            }
+				
+				assertTrue(value);
 			
-			if(value==false) {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                System.out.println();
-                System.out.println("================================================================");
-                System.out.println("Execute Time: "+ df.format(new Date()));
-                System.out.println("Test Class: "+ this.getClass().getName());
-                System.out.println("Actual Result: "+ result);
-                System.out.println("================================================================");
-                
-            }
-			
-			assertTrue(value);
-			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
 		}
@@ -78,7 +91,18 @@ public class DoDeleteTest {
 		try{
 			doDelete=new DoDelete(uid,password,"");
 			String actualResult=networkService.sendPost(urlString, doDelete.getDoDelete());
-			//System.out.print(actualResult);
+			
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testNotExist();
+		        }
+		        else {
+		          break;
+		        }
+		      }
+			
 			boolean value=actualResult.equals("{\"status\":0}");
 			
 			if(value==false) {

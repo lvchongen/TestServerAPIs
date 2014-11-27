@@ -18,6 +18,7 @@ public class AddUserTest {
 	NetworkService networkService;
 	String url;
 	AddUser addUser;
+	int i=0;
 	
 	
 	@Before
@@ -41,6 +42,17 @@ public class AddUserTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, addUser.getAddUser());
+			
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			
 			boolean value=result.contains("\"status\":\"OK\"");
 			if(value==false) {

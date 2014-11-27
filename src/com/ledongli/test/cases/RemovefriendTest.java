@@ -19,6 +19,7 @@ public class RemovefriendTest {
 	private String url;
 	private RemoveFriends removeFriends;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class RemovefriendTest {
 		removeFriends=new RemoveFriends(uid,password,friend);
 		try {
 			String result=networkService.sendPost(url, removeFriends.getRemoveFiends());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":\"OK\",");
 			
 			if(value==false) {

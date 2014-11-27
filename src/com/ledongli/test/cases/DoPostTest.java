@@ -19,6 +19,7 @@ public class DoPostTest {
 	private String url;
 	private DoPost doPost;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -41,6 +42,16 @@ public class DoPostTest {
 		try {
 			doPost=new DoPost(uid,password,uid);
 			String actString=networkService.sendPost(url, doPost.getDoPost());
+			while(i<3) {
+		        if(actString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean result=actString.contains("\\u53d1\\u9001\\u6210\\u529f");
 			
 			if(result==false) {

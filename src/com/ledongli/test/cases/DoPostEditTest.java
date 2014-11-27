@@ -27,6 +27,7 @@ public class DoPostEditTest {
 	private String url;
 	private AnalyzeResult analyzeResult;
 	private String uid,password,weiba_id;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -78,6 +79,17 @@ public class DoPostEditTest {
 			
 			doPostEdit= new DoPostEdit(uid,password,weiba_id, post_id);
 			String actualResult=networkService.sendPost(url, doPostEdit.getDoPostEdit());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
+			
 			boolean value=actualResult.contains("{\"status\":1,\"data\":\"success\"}");
 			
 			if(value==false) {

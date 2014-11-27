@@ -28,6 +28,7 @@ public class GetReplyListTest {
 	private AnalyzeResult analyzeResult;
 	private PostList postList;
 	private String uid,password,weiba_id;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -83,6 +84,16 @@ public class GetReplyListTest {
 			//获取回复列表
 			replyList=new GetReplyList(uid,password,post_id, weiba_id);
 			String result=networkService.sendPost(url, replyList.getReplyList());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testReplyNull();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":1") && result.contains("\"reply_count\":\"0\"");
 			
 			if(value==false) {

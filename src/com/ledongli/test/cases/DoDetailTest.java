@@ -22,6 +22,7 @@ public class DoDetailTest {
 	private DoPost doPost;
 	private AnalyzeResult analyzeResult;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -55,7 +56,18 @@ public class DoDetailTest {
 			
 			doDetail=new DoDetail(uid,password,list_id);
 			String result=networkService.sendPost(url, doDetail.getDoDetail());
-			//System.out.print(result);
+			
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
+			
 			boolean value=result.contains(list_id)&&result.contains(uid);
 			
 			if(value==false) {

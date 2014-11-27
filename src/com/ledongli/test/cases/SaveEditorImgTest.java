@@ -24,6 +24,7 @@ public class SaveEditorImgTest {
 	private SaveEditorImg saveEditorImg;
 	private String url;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -50,6 +51,16 @@ public class SaveEditorImgTest {
 			FileBody fileBody=new FileBody(file);
 			saveEditorImg=new SaveEditorImg(uid,password,fileBody);
 			String result=networkService.sendPostStream(url, saveEditorImg.getSaveEditorImg());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testImgMore();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			//System.out.print(result);
 			boolean value=result.contains("413 Request Entity Too Large");
 			
@@ -83,6 +94,16 @@ public class SaveEditorImgTest {
 			FileBody fileBody=new FileBody(new File(imgLess));
 			saveEditorImg=new SaveEditorImg(uid,password,fileBody);
 			String result=networkService.sendPostStream(url, saveEditorImg.getSaveEditorImg());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testImgLess();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			//System.out.print(result);
 			boolean value=result.contains("\"status\":1");
 			assertTrue(value);

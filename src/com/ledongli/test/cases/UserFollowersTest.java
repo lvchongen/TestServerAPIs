@@ -22,6 +22,7 @@ public class UserFollowersTest {
 	private String url;
 	private Follow_Create follow_Create;
 	private String uid,password, uid_2, password_2;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -47,6 +48,16 @@ public class UserFollowersTest {
 		String actualResult;
 		try {
 			actualResult = networkService.sendPost(url, user_Followers.getUser_followers());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testUidNull();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			//System.out.print(actualResult);
 			boolean exist1=actualResult.contains("[")&&actualResult.contains("]");
 			boolean exist2=actualResult.contains("follow_id");
@@ -82,6 +93,16 @@ public class UserFollowersTest {
 		String actualResult;
 		try{
 			actualResult = networkService.sendPost(url, user_Followers.getUser_followers());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testUidIsnotNull();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			//system.out.print(actualResult);
 			boolean exist1=actualResult.contains("[")&&actualResult.contains("]");
 			boolean exist2=actualResult.contains("follow_id");

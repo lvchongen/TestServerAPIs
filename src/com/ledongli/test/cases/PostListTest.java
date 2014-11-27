@@ -20,6 +20,7 @@ public class PostListTest {
 	private String url;
 	private NetworkService networkService;
 	private String uid,password,weiba_id;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -43,6 +44,16 @@ public class PostListTest {
 		try{
 			postList=new PostList(uid,password,weiba_id);
 			String actualResult=networkService.sendPost(url, postList.getPostList());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean result=actualResult.contains("\"status\":1");
 			
 			if(result==false) {

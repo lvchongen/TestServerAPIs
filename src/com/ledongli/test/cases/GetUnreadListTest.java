@@ -19,6 +19,7 @@ public class GetUnreadListTest {
 	private String url;
 	private GetUnreadList getUnreadList;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -41,6 +42,16 @@ public class GetUnreadListTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, getUnreadList.getUnreadList());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("list")&&result.contains("count");
 			
 			if(value==false) {

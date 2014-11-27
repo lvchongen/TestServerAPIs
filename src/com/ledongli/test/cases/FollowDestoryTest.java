@@ -21,6 +21,7 @@ public class FollowDestoryTest {
 	private Follow_Destory follow_Destory;
 	private Follow_Create follow_Create;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -48,6 +49,16 @@ public class FollowDestoryTest {
 			String temp=networkService.sendPost(url, follow_Create.getFollow_create());
 			//System.out.print(temp);
 			String actualResult=networkService.sendPost(url, follow_Destory.getFollow_destory());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testDestoryOtherPeople();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			String expectResult=follow_Destory.getExpectedResult(1);
 			//System.out.print(actualResult);
 			boolean value=actualResult.equals(expectResult);

@@ -26,6 +26,7 @@ public class AddfriendsTest {
 	private AnalyzeResult analyzeResult;
 	
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -63,6 +64,17 @@ public class AddfriendsTest {
 			int[] friend={friend1,friend2};
 			addfriends=new Addfriends(uid,password,friend);
 			String result=networkService.sendPost(url, addfriends.getAddfriendsList());
+			
+			while(i<3) {
+				if(result.contains("time out")) {
+					i++;
+					Thread.sleep(3000);
+					testGetAddfriendsList();
+				}
+				else {
+					break;
+				}
+			}
 			
 			boolean value=result.contains("\"status\":\"OK\"");
 			

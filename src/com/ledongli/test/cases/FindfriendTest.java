@@ -19,6 +19,7 @@ public class FindfriendTest {
 	private String url;
 	private Findfriend findfriend;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class FindfriendTest {
 		findfriend=new Findfriend(uid,password,name);
 		try {
 			String result=networkService.sendPost(url, findfriend.getFindFriend());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":\"OK\"");
 			
 			if(value==false) {

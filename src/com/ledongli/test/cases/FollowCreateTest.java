@@ -19,6 +19,7 @@ public class FollowCreateTest {
 	private NetworkService networkService;
 	private String url;
 	private String uid,password;
+	private int i=0;
 	
 	private Follow_Create follow_Create;
 	@Before
@@ -43,6 +44,16 @@ public class FollowCreateTest {
 		try {
 			follow_Create=new Follow_Create(uid,password,"1");
 			String actualResult=networkService.sendPost(url, follow_Create.getFollow_create());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testFollowOtherPeople();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			String expectResult=follow_Create.getExpectedResult(1);
 			
 			boolean value=actualResult.contains("\"following\":1");
@@ -78,6 +89,16 @@ public class FollowCreateTest {
 			follow_Create=new Follow_Create(uid,password,uid);
 			String actualResult=networkService.sendPost(url, follow_Create.getFollow_create());
 			String expectResult=follow_Create.getExpectedResult(2);
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testFollowMyself();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			//System.out.print(actualResult);
 			
 			boolean value=actualResult.equals(expectResult);

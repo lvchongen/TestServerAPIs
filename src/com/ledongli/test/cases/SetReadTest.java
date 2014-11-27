@@ -19,6 +19,7 @@ public class SetReadTest {
 	private String url;
 	private SetRead setRead;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class SetReadTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, setRead.getSetRead());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":1");
 			
 			if(value==false) {

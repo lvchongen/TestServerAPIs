@@ -19,6 +19,7 @@ public class UserFriendsTest {
 	private NetworkService networkService;
 	private User_Friends user_Friends;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -42,6 +43,16 @@ public class UserFriendsTest {
 		try {
 			user_Friends=new User_Friends(uid,password,"");
 			String actString=networkService.sendPost(url, user_Friends.getUser_friends());
+			while(i<3) {
+		        if(actString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testUserIDisNull();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			//System.out.print(actString);
 			if(actString=="[]")
 				assertTrue(true);
@@ -77,6 +88,16 @@ public class UserFriendsTest {
 		try{
 			user_Friends=new User_Friends(uid,password,uid);
 			String actString=networkService.sendPost(url, user_Friends.getUser_friends());
+			while(i<3) {
+		        if(actString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testUserIDisNotNull();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			if(actString=="[]")
 				assertTrue(true);
 			else {

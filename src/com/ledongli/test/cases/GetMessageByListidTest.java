@@ -23,7 +23,7 @@ public class GetMessageByListidTest {
 	private String url;
 	private AnalyzeResult analyzeResult;
 	private String uid,password;
-	
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -55,6 +55,16 @@ public class GetMessageByListidTest {
 			//System.out.print(message_id);
 			getMessageByListId=new GetMessageByListId(uid,password,list_id);
 			String actualResult=networkService.sendPost(url, getMessageByListId.getMessageByListId());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean result=actualResult.contains(message_id)&&actualResult.contains(list_id);
 			
 			if(result==false) {

@@ -18,6 +18,7 @@ public class UserFolowingTest {
 	private NetworkService networkService;
 	private User_Following user_Following;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -39,6 +40,16 @@ public class UserFolowingTest {
 	public void test() {
 		try {
 			String actualString=networkService.sendPost(url, user_Following.getUser_following());
+			while(i<3) {
+		        if(actualString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			if(actualString=="[]") {
 				assertTrue(true);
 			}

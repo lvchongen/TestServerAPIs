@@ -19,6 +19,7 @@ public class DoPostGroupTest {
 	private String url;
 	private DoPostGroup doPostGroup;
 	private String uid,password,weiba_id;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -41,7 +42,16 @@ public class DoPostGroupTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, doPostGroup.getDoPost());
-			//System.out.print(result);
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":1")&&result.contains("\"data\":\"success\"");
 			
 			if(value==false) {

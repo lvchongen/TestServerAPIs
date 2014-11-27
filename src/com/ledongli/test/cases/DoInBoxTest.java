@@ -19,6 +19,7 @@ public class DoInBoxTest {
 	private NetworkService networkService;
 	private DoInBox doInBox;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -41,6 +42,17 @@ public class DoInBoxTest {
 	public void test() {
 		try {
 			String actualString=networkService.sendPost(url, doInBox.getDoInBox());
+			while(i<3) {
+		        if(actualString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
+			
 			if(actualString!=null) {
 				//System.out.print(actualString);
 				boolean result1=actualString.contains("list_id");

@@ -34,6 +34,7 @@ public class GetEditorImgTest {
 	private AnalyzeResult analyzeResult;
 	private SaveEditorImg saveEditorImg;
 	private String uid,password,weiba_id;
+	private int i=0;
 	
 	@Before
 	public void setUp() {
@@ -109,6 +110,16 @@ public class GetEditorImgTest {
 			//»ñÈ¡Ìû×ÓÍ¼Æ¬
 			editorImg=new GetEditorImg(uid,password,weiba_id, post_id);
 			String result=networkService.sendPost(url, editorImg.getEditorImg());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":1");
 			
 			if(value==false) {

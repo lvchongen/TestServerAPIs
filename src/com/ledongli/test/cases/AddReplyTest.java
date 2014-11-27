@@ -27,6 +27,7 @@ public class AddReplyTest {
 	private AddReply addReply;
 	private AnalyzeResult analyzeResult;
 	private PostList postList;
+	private int i=0;
 	
 	private String uid,password,weiba_id;
 	
@@ -87,7 +88,18 @@ public class AddReplyTest {
 			
 			addReply=new AddReply(uid,password,weiba_id, post_id, post_uid, content);
 			String result=networkService.sendPost(url, addReply.getAddReply());
-			//System.out.print(result);
+			
+			while(i<3) {
+				if(result.contains("time out")) {
+					i++;
+					Thread.sleep(3000);
+					testReplyOwner();
+				}
+				else {
+					break;
+				}
+			}
+			
 			boolean value1=result.contains("\\u8bc4\\u8bba\\u6210\\u529f");
 			boolean value2=result.contains("too frequent");
 			boolean value=value1 || value2;

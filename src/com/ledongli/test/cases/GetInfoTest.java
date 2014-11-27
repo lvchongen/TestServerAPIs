@@ -19,6 +19,7 @@ public class GetInfoTest {
 	private String url;
 	private GetInfo getInfo;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class GetInfoTest {
 	public void test() {
 		try {
 			String result=networkService.sendPost(url, getInfo.getGetInfoList());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":\"OK\"");
 			
 			if(value==false) {

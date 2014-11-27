@@ -19,6 +19,7 @@ public class GetuserlimitedinfoTest {
 	private String url;
 	private Getuserlimitedinfo getuserlimitedinfo;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class GetuserlimitedinfoTest {
 		getuserlimitedinfo=new Getuserlimitedinfo(uid,password,targetUid);
 		try {
 			String result=networkService.sendPost(url, getuserlimitedinfo.getUserlimitList());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":\"OK\"");
 			
 			if(value==false) {

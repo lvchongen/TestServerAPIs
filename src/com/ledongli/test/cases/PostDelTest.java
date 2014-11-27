@@ -28,6 +28,7 @@ public class PostDelTest {
 	private AnalyzeResult analyzeResult;
 	private PostList postList;
 	private String uid,password,weiba_id;
+	private int i=0;
 
 	@Before
 	public void setUp() throws Exception {
@@ -84,6 +85,16 @@ public class PostDelTest {
 			//删帖, 验证条件1， json结构返回success：1 
 			postDel=new PostDel(uid,password,post_id);
 			String result=networkService.sendPost(url, postDel.getPostDel());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value1=result.contains("\"status\":1");
 			
 			//验证条件二， 返回postList 中不存在对应post_id

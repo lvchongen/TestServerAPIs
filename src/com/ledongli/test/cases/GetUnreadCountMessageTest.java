@@ -19,6 +19,7 @@ public class GetUnreadCountMessageTest {
 	private NetworkService networkService;
 	private String url;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +41,16 @@ public class GetUnreadCountMessageTest {
 	public void test() {
 		try {
 			String actualString=networkService.sendPost(url, getUnreadCount_Message.getUnReadCount());
+			while(i<3) {
+		        if(actualString.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean result1=actualString.contains("unread_comment");
 			boolean result2=actualString.contains(("new_applicant_count"));
 			boolean result=result1&&result2;

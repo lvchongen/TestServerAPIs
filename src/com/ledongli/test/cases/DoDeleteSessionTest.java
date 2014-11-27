@@ -23,6 +23,7 @@ public class DoDeleteSessionTest {
 	private DoPost doPost;
 	private AnalyzeResult analyzeResult;
 	private String uid,password;
+	private int i=0;
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,6 +47,17 @@ public class DoDeleteSessionTest {
 		try {
 			doDeleteSession=new DoDeleteSession(uid,password,"2783");
 			String actualResult=networkService.sendPost(url, doDeleteSession.getDoDeleteSession());
+			
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testNotExistSession();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=actualResult.contains("\"status\":0");
 			
 			if(value==false) {
@@ -81,6 +93,17 @@ public class DoDeleteSessionTest {
 			
 			doDeleteSession=new DoDeleteSession(uid,password,message_id);
 			String actualResult=networkService.sendPost(url, doDeleteSession.getDoDeleteSession());
+			while(i<3) {
+		        if(actualResult.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          testExistSession();
+		        }
+		        else {
+		          break;
+		        }
+		      }
+			
 			boolean value=actualResult.contains("{\"status\":1}");
 			
 			if(value==false) {

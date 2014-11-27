@@ -20,6 +20,7 @@ public class RankNearTest {
 	private String url;
 	private Ranknear ranknear;
 	private String uid,password;
+	private int i=0;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -43,6 +44,16 @@ public class RankNearTest {
 		
 		try {
 			String result=networkService.sendPost(url, ranknear.getRanknearList());
+			while(i<3) {
+		        if(result.contains("time out")) {
+		          i++;
+		          Thread.sleep(3000);
+		          test();
+		        }
+		        else {
+		          break;
+		        }
+		      }
 			boolean value=result.contains("\"status\":\"OK\"");
 			
 			if(value==false) {
