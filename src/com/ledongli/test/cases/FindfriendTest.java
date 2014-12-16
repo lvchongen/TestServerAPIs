@@ -37,7 +37,7 @@ public class FindfriendTest {
 
 	@Test
 	public void test() {
-		String name="dljt121313";
+		String name="aa";
 		findfriend=new Findfriend(uid,password,name);
 		try {
 			String result=networkService.sendPost(url, findfriend.getFindFriend());

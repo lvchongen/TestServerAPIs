@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -34,10 +36,11 @@ public class NetworkService {
 	private String weiba_id;
 	private String uid,uid_2;
 	private String password,password_2;
+	private String serverUpdate;
 	
 
-	//ÅÐ¶ÏStaging·þÎñÆ÷ºÍProduct·þÎñÆ÷  serverValue=1 ÎªStaging£¬ 2ÎªProduct
-	private int serverValue=1;
+	//ï¿½Ð¶ï¿½Stagingï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Productï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  serverValue=1 ÎªStagingï¿½ï¿½ 2ÎªProduct
+	private int serverValue=2;
 	
 	public NetworkService(){
 		httpclient = HttpClients.createDefault();
@@ -50,7 +53,7 @@ public class NetworkService {
 		case 1:
 			server_IP="http://social.api.ledongli.cn:8090/staging/index.php";
 			serverIO_IP="http://core.api.ledongli.cn/staging/io.ashx?";
-			weiba_id="1000075"; //²âÊÔÌû×ÓÓÅ»¯°¡
+			weiba_id="1000075"; //
 			uid="2949163";
 			password="123456";
 			uid_2="2951962";
@@ -60,32 +63,80 @@ public class NetworkService {
 		case 2:
 			server_IP="http://social.api.ledongli.cn:8090/xq/index.php";
 			serverIO_IP="http://core.api.ledongli.cn/xq/io.ashx";
-			weiba_id="1001897"; //¿É¿Ú¿ÉÀÖ
-			uid="6736648";
-			password="863162020225227";
-			uid_2="6685641";
+			serverUpdate="http://pl.api.ledongli.cn/xq/io.ashx";
+			weiba_id="1001897"; //
+			uid="6736648"; //
+			password="860452021016300";
+			uid_2="10995534";
 			password_2="359535053460293";
 			break;
+		
 			
+		//xq ï¿½Ö²ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	112.124.18.116 ï¿½ï¿½ 121.40.189.40:8090
 		case 3:
-			server_IP="http://121.40.189.41:8090/xq/index.php";
-			serverIO_IP="http://121.40.189.41/xq/io.ashx?";
-			weiba_id="1001897"; //¿É¿Ú¿ÉÀÖ
-			uid="6736648";
-			password="863162020225227";
-			uid_2="6685641";
+			server_IP="http://121.40.189.40:8090/xq/index.php";
+			serverIO_IP="http://112.124.18.116/xq/io.ashx?";
+			weiba_id="1001897"; //ï¿½É¿Ú¿ï¿½ï¿½ï¿½
+			uid="6736648"; //ï¿½×ºï¿½ï¿½ï¿½ï¿½
+			password="359535053460293";
+			uid_2="10995534";
 			password_2="359535053460293";
 			break;
-			
+		
+		//xq ï¿½Ö²ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 112.124.8.165
 		case 4:
-			server_IP="http://112.124.8.165/xq/index.php";
+			server_IP="http://112.124.8.165:8090/xq/index.php";
 			serverIO_IP="http://112.124.8.165/xq/io.ashx?";
-			weiba_id="1001897"; //¿É¿Ú¿ÉÀÖ
+			weiba_id="1001897"; //ï¿½É¿Ú¿ï¿½ï¿½ï¿½
 			uid="6736648";
 			password="31415926";
 			uid_2="6685641";
 			password_2="359535053460293";
 			break;
+			
+		//xq ï¿½Ö²ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 121.199.25.172	
+		case 5:
+			server_IP="http://121.199.25.172:8090/xq/index.php";
+			serverIO_IP="http://121.199.25.172/xq/io.ashx?";
+			weiba_id="1001897"; //ï¿½É¿Ú¿ï¿½ï¿½ï¿½
+			uid="6736648";
+			password="31415926";
+			uid_2="6685641";
+			password_2="359535053460293";
+			break;
+			
+		//xq ï¿½Ö²ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	121.199.62.70
+		case 6:
+			server_IP="http://121.199.62.70:8090/xq/index.php";
+			serverIO_IP="http://121.199.62.70/xq/io.ashx?";
+			weiba_id="1001897"; //ï¿½É¿Ú¿ï¿½ï¿½ï¿½
+			uid="6736648";
+			password="31415926";
+			uid_2="6685641";
+			password_2="359535053460293";
+			break;
+			
+		//xq ï¿½Ö²ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 114.215.185.208	
+		case 7:
+			server_IP="http://114.215.185.208:8090/xq/index.php";
+			serverIO_IP="http://114.215.185.208/xq/io.ashx?";
+			weiba_id="1001897"; //ï¿½É¿Ú¿ï¿½ï¿½ï¿½
+			uid="6736648";
+			password="31415926";
+			uid_2="6685641";
+			password_2="359535053460293";
+			break;
+		
+		//xq ï¿½Ö²ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 115.29.225.238
+		case 8:
+			server_IP="http://115.29.225.238:8090/xq/index.php";
+			serverIO_IP="http://115.29.225.238/xq/io.ashx?";
+			weiba_id="1001897"; //ï¿½É¿Ú¿ï¿½ï¿½ï¿½
+			uid="6736648";
+			password="31415926";
+			uid_2="6685641";
+			password_2="359535053460293";
+			break;	
 		}
 		
 		
@@ -120,8 +171,12 @@ public class NetworkService {
 		return password_2;
 	}
 	
+	public String getUrlUpdate() {
+		return serverUpdate;
+	}
 	
-	//¶¨ÒåSendPost ·½·¨
+	
+	//ï¿½ï¿½ï¿½ï¿½SendPost ï¿½ï¿½ï¿½ï¿½
 	public String sendPost(String url, List<NameValuePair> content) throws IOException{
 		
 		httpPost=new HttpPost(url);
@@ -145,7 +200,7 @@ public class NetworkService {
 	}
 	
 	
-	//¶¨ÒåSendPostStream·½·¨
+	//ï¿½ï¿½ï¿½ï¿½SendPostStreamï¿½ï¿½ï¿½ï¿½
 	public String sendPostStream(String url, HttpEntity entity) throws IOException{
 		
 		httpPost=new HttpPost(url);
@@ -165,5 +220,6 @@ public class NetworkService {
 		return result;
 		
 	}
+	
 	
 }
